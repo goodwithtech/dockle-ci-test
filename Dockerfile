@@ -1,6 +1,6 @@
-FROM ubuntu:latest
+FROM debian:latest
 
-RUN apt-get install wget curl git
+RUN apt-get update && apt-get install -y git
 RUN useradd nopasswd -p ""
 
 VOLUME /usr
