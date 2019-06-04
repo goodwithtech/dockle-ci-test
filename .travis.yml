@@ -1,0 +1,15 @@
+services:
+  - docker
+
+env:
+  global:
+    - COMMIT=${TRAVIS_COMMIT::8}
+
+before_install:
+  - docker build -t guard-ci-test:${COMMIT} .
+  - export VERSION=$(curl --silent "https://api.github.com/repos/goodwithtech/docker-guard/releases/latest" | grep '"tag_name":' | sed -E 's/.*"v([^"]+)".*/\1/')
+  - wget https://github.com/goodwithtech/docker-guard/releases/download/v${VERSION}/guard_${VERSION}_Linux-64bit.tar.gz
+  - tar zxvf guard_${VERSION}_Linux-64bit.tar.gz
+script:
+  - ./guard guard-ci-test:${COMMIT}
+  - ./guard --exit-code 1 guard-ci-test:${COMMIT}
