@@ -11,5 +11,4 @@ before_install:
   - wget https://github.com/goodwithtech/docker-guard/releases/download/v${VERSION}/guard_${VERSION}_Linux-64bit.tar.gz
   - tar zxvf guard_${VERSION}_Linux-64bit.tar.gz
 script:
-  - ./guard guard-ci-test:${COMMIT}
   - ./guard --exit-code 1 guard-ci-test:${COMMIT}
