@@ -7,23 +7,23 @@ jobs:
       - setup_remote_docker
       - run:
           name: Build image
-          command: docker build -t guard-ci-test:${CIRCLE_SHA1} .
+          command: docker build -t dockle-ci-test:${CIRCLE_SHA1} .
       - run:
-          name: Install guard
+          name: Install dockle
           command: |
             apk add --update curl
             VERSION=$(
-                curl --silent "https://api.github.com/repos/goodwithtech/docker-guard/releases/latest" | \
+                curl --silent "https://api.github.com/repos/goodwithtech/dockle/releases/latest" | \
                 grep '"tag_name":' | \
                 sed -E 's/.*"v([^"]+)".*/\1/'
             )
 
-            wget https://github.com/goodwithtech/docker-guard/releases/download/v${VERSION}/guard_${VERSION}_Linux-64bit.tar.gz
-            tar zxvf guard_${VERSION}_Linux-64bit.tar.gz
-            mv guard /usr/local/bin
+            wget https://github.com/goodwithtech/dockle/releases/download/v${VERSION}/dockle_${VERSION}_Linux-64bit.tar.gz
+            tar zxvf dockle_${VERSION}_Linux-64bit.tar.gz
+            mv dockle /usr/local/bin
       - run:
           name: Scan the local image with guard
-          command: guard --exit-code 1 guard-ci-test:${CIRCLE_SHA1}
+          command: dockle --exit-code 1 dockle-ci-test:${CIRCLE_SHA1}
 workflows:
   version: 2
   release:
