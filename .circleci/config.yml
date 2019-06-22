@@ -4,7 +4,8 @@ jobs:
       - image: docker:18.09-git
     steps:
       - checkout
-      - setup_remote_docker
+      - setup_remote_docker:
+          version: 18.09.0-ce
       - run:
           name: Build image
           command: docker build -t dockle-ci-test:${CIRCLE_SHA1} .
