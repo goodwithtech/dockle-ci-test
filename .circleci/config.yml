@@ -24,8 +24,8 @@ jobs:
       - run:
           name: Scan the local image with guard
           command: |
-          dockle python:3.4-alpine
-          dockle --exit-code 1 dockle-ci-test:${CIRCLE_SHA1}
+            dockle python:3.4-alpine
+            dockle --exit-code 1 dockle-ci-test:${CIRCLE_SHA1}
 workflows:
   version: 2
   release:
