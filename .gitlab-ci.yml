@@ -14,6 +14,7 @@ unit_test:
   before_script:
     - apk -Uuv add bash git curl tar sed grep
   script:
+    - docker build -t dockle-ci-test:${CI_COMMIT_SHORT_SHA} .
     - |
       VERSION=$(
       curl --silent "https://api.github.com/repos/goodwithtech/dockle/releases/latest" | \
@@ -21,7 +22,4 @@ unit_test:
       sed -E 's/.*"v([^"]+)".*/\1/' \
       ) && curl -L -o dockle.tar.gz https://github.com/goodwithtech/dockle/releases/download/v${VERSION}/dockle_${VERSION}_Linux-64bit.tar.gz &&  \
       tar zxvf dockle.tar.gz
-    - docker build -t dockle-ci-test:${CI_COMMIT_SHORT_SHA} .
     - ./dockle --exit-code 1 dockle-ci-test:${CI_COMMIT_SHORT_SHA}
-
-
