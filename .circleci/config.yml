@@ -13,7 +13,7 @@ jobs:
           command: |
             apk add --update curl
             VERSION=$(
-              curl -I https://github.com/goodwithtech/dockle/releases/latest | \
+              curl -I "https://github.com/goodwithtech/dockle/releases/latest" | \
               grep 'Location' | \
               sed -E 's/.*v([^"]+).*/\1/'
             )
