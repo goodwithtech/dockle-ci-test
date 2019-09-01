@@ -15,7 +15,7 @@ jobs:
             VERSION=$(
               curl -I "https://github.com/goodwithtech/dockle/releases/latest" | \
               grep 'Location' | \
-              sed -E 's/.*v([^"]+).*/\1/'
+              sed -E 's/.*v([0-9\.]+).*$/\1/'
             )
             wget https://github.com/goodwithtech/dockle/releases/download/v${VERSION}/dockle_${VERSION}_Linux-64bit.tar.gz
             tar zxvf dockle_${VERSION}_Linux-64bit.tar.gz
