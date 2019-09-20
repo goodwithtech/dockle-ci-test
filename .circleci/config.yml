@@ -4,8 +4,7 @@ jobs:
       - image: docker:18.09-git
     steps:
       - checkout
-      - setup_remote_docker:
-          version: 18.06.0-ce
+      - setup_remote_docker
       - run:
           command: |
             wget https://github.com/goodwithtech/dockle/releases/download/v0.2.0/dockle_0.2.0_Linux-64bit.tar.gz
