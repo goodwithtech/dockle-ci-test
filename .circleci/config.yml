@@ -10,17 +10,10 @@ jobs:
           name: Build image
           command: docker build -t dockle-ci-test:${CIRCLE_SHA1} .
       - run:
-          name: Install dockle
+          name: Install Dockle
           command: |
-            apk add --update curl
-            VERSION=$(
-                curl --silent "https://api.github.com/repos/goodwithtech/dockle/releases/latest" | \
-                grep '"tag_name":' | \
-                sed -E 's/.*"v([^"]+)".*/\1/'
-            )
-
-            wget https://github.com/goodwithtech/dockle/releases/download/v${VERSION}/dockle_${VERSION}_Linux-64bit.tar.gz
-            tar zxvf dockle_${VERSION}_Linux-64bit.tar.gz
+            wget https://github.com/goodwithtech/dockle/releases/download/v0.2.0/dockle_0.2.0_Linux-64bit.tar.gz
+            tar zxvf dockle_0.2.0_Linux-64bit.tar.gz
             mv dockle /usr/local/bin
       - run:
           name: Scan the local image with guard
