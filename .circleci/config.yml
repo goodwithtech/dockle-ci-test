@@ -7,9 +7,6 @@ jobs:
       - setup_remote_docker:
           version: 18.06.0-ce
       - run:
-          name: Build image
-          command: docker build -t dockle-ci-test:${CIRCLE_SHA1} .
-      - run:
           command: |
             wget https://github.com/goodwithtech/dockle/releases/download/v0.2.0/dockle_0.2.0_Linux-64bit.tar.gz
             tar zxvf dockle_0.2.0_Linux-64bit.tar.gz
@@ -17,7 +14,6 @@ jobs:
       - run:
           command: |
             dockle python:3.4-alpine
-            dockle --exit-code 1 dockle-ci-test:${CIRCLE_SHA1}
 workflows:
   version: 2
   release:
