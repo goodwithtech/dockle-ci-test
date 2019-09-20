@@ -12,7 +12,7 @@ jobs:
             mv dockle /usr/local/bin
       - run:
           command: |
-            dockle python:3.4-alpine
+            dockle --exit-code 1 python:3.4-alpine
 workflows:
   version: 2
   release:
